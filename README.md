@@ -38,6 +38,16 @@ $sudo iptables -nL
 $sudo iptables -I INPUT 6 -p tcp --dport 8080 -j ACCEPT
 $sudo iptables -nL
 //$sudo iptables -A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
-
-//? # service iptables save
+$sudo cp /etc/iptables/rules.v4 /etc/iptables/rules.v4.ori
+$sudo su
+$iptables-save > /etc/iptables/rules.v4
+$reboot
+or
+//$service iptables save
+or
+//sudo netfilter-persistent save
+//sudo netfilter-persistent reload
 ```
+iptables
+- 설정: https://meongj-devlog.tistory.com/127 | https://goni9071.tistory.com/46 | https://jdh5202.tistory.com/492
+- 저장(ubuntu): https://blog.elmi.page/406 | https://ndb796.tistory.com/262
