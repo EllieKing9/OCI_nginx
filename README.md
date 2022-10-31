@@ -1,6 +1,6 @@
 # nginx
 
-https://nginx.org/en/linux_packages.html#Ubuntu
+설치: https://nginx.org/en/linux_packages.html#Ubuntu
 
 - $sudo apt update
 - $sudo apt install nginx
@@ -37,7 +37,7 @@ iptables
 - 설정: https://meongj-devlog.tistory.com/127 | https://goni9071.tistory.com/46 | https://jdh5202.tistory.com/492
 - 저장(ubuntu): https://blog.elmi.page/406 | https://ndb796.tistory.com/262
 
-https://nginx.org/en/docs/beginners_guide.html
+구성: https://nginx.org/en/docs/beginners_guide.html
 ```
 nginx consists of modules which are controlled by directives specified in the configuration file(nginx.conf)
 Directives are divided into simple directives and block directives
@@ -46,6 +46,10 @@ block directive can have other directives inside braces, it is called a context 
 simple directives / block directives / context
 ```
 web server
+```
+
+```
+reverse proxy server
 ```
 
 ```
