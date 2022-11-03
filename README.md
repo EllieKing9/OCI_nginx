@@ -26,12 +26,12 @@ $sudo iptables -nL
 $sudo cp /etc/iptables/rules.v4 /etc/iptables/rules.v4.ori
 $sudo su
 $iptables-save > /etc/iptables/rules.v4
-$reboot
 or
 //$service iptables save
 or
 //sudo netfilter-persistent save
 //sudo netfilter-persistent reload
+$reboot
 ```
 iptables
 - 설정: https://meongj-devlog.tistory.com/127 | https://goni9071.tistory.com/46 | https://jdh5202.tistory.com/492
@@ -44,6 +44,14 @@ Directives are divided into simple directives and block directives
 block directive can have other directives inside braces, it is called a context (examples: events, http, server, and location).
 
 simple directives / block directives / context
+```
+HTTPS 세팅
+1. (무료)도메인 취득 //하루 정도 후에 사용 가능..
+- https://www.freenom.com/en/index.html?lang=en
+zhem66.ml
+2. SSL 인증서 발급
+```
+
 ```
 web server
 ```
