@@ -16,11 +16,16 @@ $sudo nano default
 
 Oracle Cloud (https://www.oracle.com/kr/cloud/)
 ```
+//Dashboard > Default Security list for VCN on Oracle Cloud 
 Inboud 규칙 추가: 0.0.0.0/0 TCP 8080
+Inboud 규칙 추가: 0.0.0.0/0 TCP 80
+Inboud 규칙 추가: 0.0.0.0/0 TCP 443
 
 //Ubuntu on Oracle Cloud
 $sudo iptables -nL
 $sudo iptables -I INPUT 6 -p tcp --dport 8080 -j ACCEPT
+$sudo iptables -I INPUT 6 -p tcp --dport 80 -j ACCEPT
+$sudo iptables -I INPUT 6 -p tcp --dport 443 -j ACCEPT
 $sudo iptables -nL
 //$sudo iptables -A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
 $sudo cp /etc/iptables/rules.v4 /etc/iptables/rules.v4.ori
@@ -46,10 +51,12 @@ block directive can have other directives inside braces, it is called a context 
 simple directives / block directives / context
 ```
 HTTPS 세팅
-1. (무료)도메인 취득 //하루 정도 후에 사용 가능..
+1. (무료)도메인 취득 //하루(24시간) 정도 후에 사용 가능..
 - https://www.freenom.com/en/index.html?lang=en
 zhem66.ml
-2. SSL 인증서 발급
+- 하루 지나도 사용이 안되면 sign in > Services > Manage Domain > Manage Freenom DNS > Target에 IP 세팅
+2. SSL 인증서 발급 (Let`s Encrypt with Certbot)
+- https://blog.hyunsub.kim/Server/HTTPS/
 ```
 
 ```
