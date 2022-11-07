@@ -56,15 +56,67 @@ HTTPS 세팅
 zhem66.ml
 - 하루 지나도 사용이 안되면 sign in > Services > Manage Domain > Manage Freenom DNS > Target에 IP 세팅
 2. SSL 인증서 발급 (Let`s Encrypt with Certbot)
+Certbot은 우분투 20.04를 설치 후 letsencrypt을 설치했다면 그 안에 포함
+- https://eff-certbot.readthedocs.io/en/stable/using.html
+```
+//$sudo apt-get install letsencrypt
+$sudo apt-get install certbot
+$sudo apt-get install python3-certbot-nginx
+```
+- nginx 자동 연계 세팅
+- https://hoing.io/archives/4491#Lets_Encrypt
+- https://blog.projectdh.link/99
+- !! https://bbul-jit.tistory.com/77
+```
+//$sudo certbot --nginx -d zhem66.ml --email 7baetae@hanmail.net --agree-tos
+$sudo certbot --nginx -d zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
+//-d --domain, -m --email, --agree-tos 항목체크, --no-eff-email lets encrypt 메일 받지않음 
+
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Would you be willing, once your first certificate is successfully issued, to
+share your email address with the Electronic Frontier Foundation, a founding
+partner of the Let's Encrypt project and the non-profit organization that
+develops Certbot? We'd like to send you email about our work encrypting the web,
+EFF news, campaigns, and ways to support digital freedom.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o: n
+Account registered.
+Requesting a certificate for zhem66.ml
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/domain/..
+Key is saved at:         /etc/letsencrypt/live/domain/..
+This certificate expires on 2023-02-05.
+These files will be updated when the certificate renews.
+Certbot has set up a scheduled task to automatically renew this certificate in the background.
+
+Deploying certificate
+Successfully deployed certificate for zhem66.ml to /etc/nginx/sites-enabled/default
+Congratulations! You have successfully enabled HTTPS on https://zhem66.ml
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+```
+- nginx 수동 세팅 및 정리(webroot/standalone/DNS/manual)
 - https://blog.hyunsub.kim/Server/HTTPS/
+- https://happist.com/573990/%EC%B5%9C%EC%8B%A0-lets-encrypt-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-3%EA%B0%80%EC%A7%80-%EC%A0%95%EB%A6%AC
 ```
 
 ```
-web server
-```
 
-```
 reverse proxy server
 ```
 
 ```
+
+web server
+```
+
+```
+
