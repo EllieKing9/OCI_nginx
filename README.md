@@ -2,6 +2,8 @@
 
 nginx 설치 (https://nginx.org/en/linux_packages.html#Ubuntu)
 
+//SSH connect > Ubuntu on Oracle Cloud
+
 - $sudo apt update
 - $sudo apt install nginx
 - $nginx -v
@@ -15,6 +17,14 @@ nginx 설치 (https://nginx.org/en/linux_packages.html#Ubuntu)
 - $sudo nginx
 - $curl localhost:80 or $curl localhost:8080
 - $sudo nginx -s quit / $nginx -s reload / $nginx -s reopen / $nginx -s stop
+- 
+- $sudo systemctl enable --now code-server
+//sudo systemctl enable --now code-server@$USER
+! WSL에서는 systemctl 를 지원하지 않는다 //systemctl(x) -> service(o)
+$sudo systemctl start code-server //실행
+$sudo systemctl stop code-server //중지
+$sudo systemctl restart code-server //재시작
+$sudo systemctl status code-server 
 
 Oracle Cloud 세팅 (https://www.oracle.com/kr/cloud/)
 ```
@@ -71,7 +81,7 @@ $sudo apt-get install python3-certbot-nginx
 ```
 //$sudo certbot --nginx -d zhem66.ml --email 7baetae@hanmail.net --agree-tos
 $sudo certbot --nginx -d zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
-$sudo certbot --nginx -d zhem66.ml -d www.zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
+//$sudo certbot --nginx -d zhem66.ml -d www.zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
 //-d --domain, -m --email, --agree-tos 항목체크, --no-eff-email lets encrypt 메일 받지않음 
 
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
@@ -105,10 +115,14 @@ If you like Certbot, please consider supporting our work by:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 브라우저에서 접속 확인 후
-$
-
+$sudo certbot renew --dry-run //갱신 테스트
+$sudo crontab -e
+0 13 1** /bin/certbot renew --pre-hook "nginx -s stop" --post-hook "nginx"
 ```
-- nginx 수동 세팅 및 정리(webroot/standalone/DNS/manual)
+서버 테스트
+- https://www.ssllabs.com/ssltest/index.html
+
+3. nginx 수동 세팅 및 정리(webroot/standalone/DNS/manual)
 - https://blog.hyunsub.kim/Server/HTTPS/
 - https://happist.com/573990/%EC%B5%9C%EC%8B%A0-lets-encrypt-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-3%EA%B0%80%EC%A7%80-%EC%A0%95%EB%A6%AC
 ```
