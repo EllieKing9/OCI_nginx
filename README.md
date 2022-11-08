@@ -82,6 +82,7 @@ $sudo apt-get install python3-certbot-nginx
 //$sudo certbot --nginx -d zhem66.ml --email 7baetae@hanmail.net --agree-tos
 $sudo certbot --nginx -d zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
 //$sudo certbot --nginx -d zhem66.ml -d www.zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
+//www.zhem66.ml 인증서에 대표로 등록됨(zhem66.ml 포함)
 //-d --domain, -m --email, --agree-tos 항목체크, --no-eff-email lets encrypt 메일 받지않음 
 
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
@@ -115,12 +116,18 @@ If you like Certbot, please consider supporting our work by:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 브라우저에서 접속 확인 후
+$netstat -na | grep LISTEN
 $sudo certbot renew --dry-run //갱신 테스트
 $sudo crontab -e
 0 13 1** /bin/certbot renew --pre-hook "nginx -s stop" --post-hook "nginx"
 ```
 서버 테스트
 - https://www.ssllabs.com/ssltest/index.html
+- 
+멀티 도메인 사용 with HTTPS
+```
+
+```
 
 3. nginx 수동 세팅 및 정리(webroot/standalone/DNS/manual)
 - https://blog.hyunsub.kim/Server/HTTPS/
