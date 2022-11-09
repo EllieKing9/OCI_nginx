@@ -1,32 +1,34 @@
-# nginx
+# OCI Nginx
 
-nginx 설치 (https://nginx.org/en/linux_packages.html#Ubuntu)
+★ nginx 설치 (https://nginx.org/en/linux_packages.html#Ubuntu)
 
+```
 //SSH connect > Ubuntu on Oracle Cloud
 
-- $sudo apt update
-- $sudo apt install nginx
-- $nginx -v
-- default port 세팅 (기본 80 -> 8080 변경시에)
-  ```
-  $cd /etc/nginx/sites-enabled
-  $sudo nano default
-    server {
-            listen port ..;
-  ```
-- $sudo nginx
-- $curl localhost:80 or $curl localhost:8080
-- $sudo nginx -s quit / $nginx -s reload / $nginx -s reopen / $nginx -s stop
-- 
-- $sudo systemctl enable --now code-server
+$sudo apt update
+$sudo apt install nginx
+$nginx -v
+
+//default port 세팅 (기본 80 -> 8080 변경시에)
+$cd /etc/nginx/sites-enabled
+$sudo nano default
+  server {
+    listen port ..;
+
+$sudo nginx
+$curl localhost:80 or $curl localhost:8080
+$sudo nginx -s quit / $nginx -s reload / $nginx -s reopen / $nginx -s stop
+ 
+$sudo systemctl enable --now code-server
 //sudo systemctl enable --now code-server@$USER
 ! WSL에서는 systemctl 를 지원하지 않는다 //systemctl(x) -> service(o)
 $sudo systemctl start code-server //실행
 $sudo systemctl stop code-server //중지
 $sudo systemctl restart code-server //재시작
 $sudo systemctl status code-server 
+```
 
-Oracle Cloud 세팅 (https://www.oracle.com/kr/cloud/)
+■ Oracle Cloud 세팅 (https://www.oracle.com/kr/cloud/)
 ```
 //Dashboard > Default Security list for VCN on Oracle Cloud 
 Inboud 규칙 추가: 0.0.0.0/0 TCP 8080
@@ -50,11 +52,12 @@ or
 //sudo netfilter-persistent reload
 $reboot
 ```
-iptables 방화벽
+
+- iptables 방화벽
 - 설정: https://meongj-devlog.tistory.com/127 | https://goni9071.tistory.com/46 | https://jdh5202.tistory.com/492
 - 저장(ubuntu): https://blog.elmi.page/406 | https://ndb796.tistory.com/262
 
-nginx 설정 구성 (https://nginx.org/en/docs/beginners_guide.html)
+■ nginx 설정 구성 (https://nginx.org/en/docs/beginners_guide.html)
 ```
 nginx consists of modules which are controlled by directives specified in the configuration file(nginx.conf)
 Directives are divided into simple directives and block directives
@@ -62,7 +65,8 @@ block directive can have other directives inside braces, it is called a context 
 
 simple directives / block directives / context
 ```
-HTTPS 세팅
+
+■ HTTPS 세팅
 1. (무료)도메인 취득 //하루(24시간) 정도 후에 사용 가능..
 - https://www.freenom.com/en/index.html?lang=en
 zhem66.ml
@@ -115,28 +119,27 @@ If you like Certbot, please consider supporting our work by:
  * Donating to EFF:                    https://eff.org/donate-le
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-브라우저에서 접속 확인 후
+//브라우저에서 접속 확인 후
 $netstat -na | grep LISTEN
 $sudo certbot renew --dry-run //갱신 테스트
 $sudo crontab -e
 0 13 1** /bin/certbot renew --pre-hook "nginx -s stop" --post-hook "nginx"
 ```
-서버 테스트
-- https://www.ssllabs.com/ssltest/index.html
-- 
-멀티 도메인 사용 with HTTPS
-```
 
-```
+- 서버 테스트 (https://www.ssllabs.com/ssltest/index.html)
 
-3. nginx 수동 세팅 및 정리(webroot/standalone/DNS/manual)
+- 멀티 도메인 사용 with HTTPS
+  ```
+  
+  ```
+
+3. nginx 수동 세팅 및 정리 # webroot/standalone/DNS/manual
 - https://blog.hyunsub.kim/Server/HTTPS/
 - https://happist.com/573990/%EC%B5%9C%EC%8B%A0-lets-encrypt-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-3%EA%B0%80%EC%A7%80-%EC%A0%95%EB%A6%AC
 ```
-
 ```
 
-reverse proxy server
+■ reverse proxy server
 ```
 $sudo /etc/nginx/sites-enabled/default
   upstream code-server { # add
@@ -170,7 +173,8 @@ $sudo /etc/nginx/sites-enabled/default
     server web-02;
   }
   ```
-web server
+  
+■ web server
 ```
 $sudo nano /etc/nginx/nginx.conf
   http {
@@ -179,7 +183,7 @@ $sudo nano /etc/nginx/nginx.conf
 ```
 
 
-Nginx 구문 관련하여 읽어볼만한
+■ Nginx 구문 관련하여 읽어볼만한
 - Nginx 설명 https://icarus8050.tistory.com/57 | https://extrememanual.net/9976
 - 환경 설정 https://12bme.tistory.com/366 | https://server-talk.tistory.com/304
 - SSL 설정 https://server-talk.tistory.com/315?category=925489
