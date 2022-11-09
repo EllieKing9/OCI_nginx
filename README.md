@@ -139,7 +139,7 @@ $sudo crontab -e
 ```
 ```
 
-■ reverse proxy server
+■ reverse proxy server (https://010000.github.io/post/20210312_login_code-server_nginx_centos/)
 ```
 $sudo /etc/nginx/sites-enabled/default
   upstream code-server { # add
