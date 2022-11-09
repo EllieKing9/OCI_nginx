@@ -156,7 +156,20 @@ $sudo /etc/nginx/sites-enabled/default
     }
 ```
 - 로드밸런싱 (https://www.joinc.co.kr/w/man/12/proxy)
-
+  ```
+  upstream test_proxy { # Round-Robin 모든 서버에 도등하게 요청하여 분산
+    server web-01;
+    server web-02;
+  }
+  upstream test_proxy {
+    least_conn; # 연결이 가장 작은 서버로 요청하여 분산
+    ip_hash; # 클라이언트 IP주소를 기준으로 요청을 분산
+    hash $request_uri consistent; # 정의한 변수나 KEY 조합으로 해시하여 분산
+    
+    server web-01;
+    server web-02;
+  }
+  ```
 web server
 ```
 $sudo nano /etc/nginx/nginx.conf
