@@ -178,3 +178,9 @@ $sudo nano /etc/nginx/nginx.conf
     server_tokens off; #nginx 버전 숨김
 ```
 
+
+Nginx 구문 관련하여 읽어볼만한
+- Nginx 설명 https://icarus8050.tistory.com/57 | https://extrememanual.net/9976
+- 환경 설정 https://12bme.tistory.com/366 | https://server-talk.tistory.com/304
+- SSL 설정 https://server-talk.tistory.com/315?category=925489
+- 가상 호스트 https://www.lesstif.com/system-admin/nginx-24444975.html
