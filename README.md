@@ -80,8 +80,8 @@ $sudo apt-get install python3-certbot-nginx
 - !! https://bbul-jit.tistory.com/77
 ```
 //$sudo certbot --nginx -d zhem66.ml --email 7baetae@hanmail.net --agree-tos
-$sudo certbot --nginx -d zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
-//$sudo certbot --nginx -d zhem66.ml -d www.zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
+//$sudo certbot --nginx -d zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
+$sudo certbot --nginx -d zhem66.ml -d www.zhem66.ml -m 7baetae@hanmail.net --agree-tos --no-eff-email
 //www.zhem66.ml 인증서에 대표로 등록됨(zhem66.ml 포함)
 //-d --domain, -m --email, --agree-tos 항목체크, --no-eff-email lets encrypt 메일 받지않음 
 
@@ -138,11 +138,30 @@ $sudo crontab -e
 
 reverse proxy server
 ```
-
+$sudo /etc/nginx/sites-enabled/default
+  upstream code-server { # add
+    server 127.0.0.1:8081;
+  }
+  
+  server { 
+  ..
+    listen 443 ssl;
+    ..
+    location / { # add
+      proxy_pass http://code-server;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection upgrade;
+      proxy_set_header Accept-Encoding gzip;
+      proxy_buffering off;
+    }
 ```
+- 로드밸런싱 (https://www.joinc.co.kr/w/man/12/proxy)
 
 web server
 ```
-
+$sudo nano /etc/nginx/nginx.conf
+  http {
+    ..
+    server_tokens off; #nginx 버전 숨김
 ```
 
